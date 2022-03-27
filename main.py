@@ -27,7 +27,11 @@ class App(tk.Tk):
         # Data
         self.languages = googletrans.LANGUAGES
         self.languages = dict([(value.capitalize(), key) for key, value in self.languages.items()])
+        self.languages["Hebrew"] = "iw"
+        self.languages["Chinese (traditional)"] = "zh-TW"
+        self.languages["Chinese (simplified)"] = "zh-CN"
         self.languages_list = [i for i in self.languages.keys()]
+
         self.sl = str()
         self.tl = "fr"
 
@@ -85,12 +89,15 @@ class App(tk.Tk):
         self.auto_radio.config(font=NORMAL_FONT, command=self.on_radio_choice)
         self.select_radio.config(font=NORMAL_FONT, command=self.on_radio_choice)
         self.input_text.bind("<KeyRelease>", self.check_if_translate)
+        self.input_text.config(borderwidth=3)
+        self.output_text.config(borderwidth=3)
 
         self.input_combo.set("Auto")
         self.output_combo.set("French")
         self.auto_radio.select()
         self.input_combo.config(state=tk.DISABLED)
-        self.trad_btn.config(state=tk.DISABLED)
+        self.trad_btn.config(state=tk.DISABLED, borderwidth=3)
+        self.clear_btn.config(borderwidth=3)
         self.input_text.focus_set()
 
         self.input_text.grid(row=0, column=0, pady=5)
